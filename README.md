@@ -1,6 +1,6 @@
 ---
 title: OpenClaw AI Gateway
-emoji: 🐾
+emoji: 🦀
 colorFrom: indigo
 colorTo: purple
 sdk: docker
@@ -8,7 +8,11 @@ pinned: true
 app_port: 7860
 ---
 
-# 🐾 OpenClaw AI Gateway — Hugging Face Spaces
+<p align="center">
+  <img src="assets/openclaw-logo.png" alt="OpenClaw" width="128" height="128">
+</p>
+
+# OpenClaw AI Gateway — Hugging Face Spaces
 
 A self-hosted OpenClaw instance powered by NVIDIA NIM models, running on Hugging Face Spaces with Docker.
 
