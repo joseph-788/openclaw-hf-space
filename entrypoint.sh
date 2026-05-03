@@ -51,7 +51,7 @@ echo "=============================================="
 # ---------- Launch OpenClaw Gateway ------------------------------------------
 # --port 7860 for HF Spaces compatibility
 # --bind lan so it listens on 0.0.0.0 (not just loopback)
-exec openclaw gateway start \
+exec openclaw gateway run \
     --port 7860 \
     --bind lan \
-    --foreground
+    --verbose
