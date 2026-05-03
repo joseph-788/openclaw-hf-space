@@ -1,0 +1,36 @@
+# =============================================================================
+# docker-compose.yml — OpenClaw on Hugging Face Spaces
+# =============================================================================
+# For local testing. On HF Spaces, the Dockerfile is used directly.
+#
+# Required environment variables (set in .env or HF Space Secrets):
+#   NVIDIA_API_KEY   — Your NVIDIA NIM API key
+#   GEMINI_API_KEY   — Google Gemini API key for web search grounding
+#   GATEWAY_TOKEN    — Gateway auth token (optional, defaults to "openclaw-hf-spaces")
+# =============================================================================
+
+services:
+  openclaw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: openclaw-hf
+    ports:
+      - "7860:7860"
+    environment:
+      - NVIDIA_API_KEY=${NVIDIA_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GATEWAY_TOKEN=${GATEWAY_TOKEN:-openclaw-hf-spaces}
+    volumes:
+      # Persist workspace and config across restarts
+      - openclaw-data:/home/openclaw/.openclaw
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:7860/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+
+volumes:
+  openclaw-data:
